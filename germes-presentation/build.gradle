@@ -3,7 +3,7 @@ plugins {
 }
 
 apply plugin: 'war'
-apply plugin: 'jetty'
+//apply plugin: 'jetty'
 
 dependencies {
     compile project(':germes-service')
@@ -20,6 +20,6 @@ tomcat {
 	contextPath = '/'
 }
 
-jettyRun {
-	contextPath = ''
-}
+//jettyRun {
+//	contextPath = ''
+//}
