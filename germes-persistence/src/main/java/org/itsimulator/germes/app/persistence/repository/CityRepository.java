@@ -35,5 +35,5 @@ public interface CityRepository {
 	 * @return
 	 */
 	List<City> findAll();
-
+	
 }

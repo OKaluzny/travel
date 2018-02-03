@@ -67,4 +67,5 @@ public class HibernateCityRepository implements CityRepository {
 			return session.createCriteria(City.class).list();
 		}
 	}
+
 }
