@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 
 import org.itsimulator.germes.app.infra.util.CommonUtil;
 import org.itsimulator.germes.app.model.entity.base.AbstractEntity;
@@ -25,7 +28,7 @@ import org.itsimulator.germes.app.model.entity.transport.TransportType;
 @Entity
 public class City extends AbstractEntity {
 	public static final String FIELD_NAME = "name";
-	
+
 	private String name;
 
 	/**
@@ -51,6 +54,8 @@ public class City extends AbstractEntity {
 		this.name = name;
 	}
 
+	@NotNull
+	@Size(min = 2, max = 32)
 	@Column(name = "NAME", nullable = false, length = 32)
 	public String getName() {
 		return name;
@@ -78,7 +83,7 @@ public class City extends AbstractEntity {
 		this.region = region;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "city", orphanRemoval = true)	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "city", orphanRemoval = true)
 	public Set<Station> getStations() {
 		return CommonUtil.getSafeSet(stations);
 	}
