@@ -22,7 +22,14 @@ import org.itsimulator.germes.app.rest.service.base.BaseResource;
 import org.itsimulator.germes.app.service.GeographicService;
 import org.itsimulator.germes.app.service.transform.Transformer;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @Path("cities")
+@Api("cities")
 /**
  * {@link CityResource} is REST web-service that handles city-related requests
  * 
@@ -55,6 +62,7 @@ public class CityResource extends BaseResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation(value = "Returns all the existing cities")
 	/**
 	 * Returns all the existing cities
 	 * 
@@ -79,12 +87,15 @@ public class CityResource extends BaseResource {
 	@Path("/{cityId}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation(value = "Returns existing city by its identifier")
+	@ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid city identifier"),
+			@ApiResponse(code = 404, message = "Identifier of the non-existing city") })
 	/**
 	 * Returns city with specified identifier
 	 * 
 	 * @return
 	 */
-	public Response findCityById(@PathParam("cityId") final String cityId) {
+	public Response findCityById(@ApiParam("Unique numeric city identifier") @PathParam("cityId") final String cityId) {
 		if (!NumberUtils.isNumber(cityId)) {
 			return BAD_REQUEST;
 		}
