@@ -29,3 +29,5 @@ bin/
 .gradle
 **/bower_components/
 **/node_modules/
+**/Chrome*
+**/dest
