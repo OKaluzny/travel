@@ -24,7 +24,8 @@ import org.itsimulator.germes.app.service.transform.Transformer;
 
 @Path("cities")
 /**
- * {@link CityResource} is REST web-service that handles city-related requests  
+ * {@link CityResource} is REST web-service that handles city-related requests
+ * 
  * @author Morenets
  *
  */
@@ -56,6 +57,7 @@ public class CityResource extends BaseResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	/**
 	 * Returns all the existing cities
+	 * 
 	 * @return
 	 */
 	public List<CityDTO> findCities() {
@@ -67,6 +69,7 @@ public class CityResource extends BaseResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	/**
 	 * Saves new city instance
+	 * 
 	 * @return
 	 */
 	public void saveCity(CityDTO cityDTO) {
@@ -78,13 +81,14 @@ public class CityResource extends BaseResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	/**
 	 * Returns city with specified identifier
+	 * 
 	 * @return
 	 */
 	public Response findCityById(@PathParam("cityId") final String cityId) {
-		if(!NumberUtils.isNumber(cityId)) {
+		if (!NumberUtils.isNumber(cityId)) {
 			return BAD_REQUEST;
 		}
-		
+
 		Optional<City> city = service.findCitiyById(NumberUtils.toInt(cityId));
 		if (!city.isPresent()) {
 			return NOT_FOUND;
