@@ -31,3 +31,4 @@ bin/
 **/node_modules/
 **/Chrome*
 **/dest
+**/dist
