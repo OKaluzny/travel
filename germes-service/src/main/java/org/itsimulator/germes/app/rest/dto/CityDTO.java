@@ -3,25 +3,31 @@ package org.itsimulator.germes.app.rest.dto;
 import org.itsimulator.germes.app.model.entity.geography.City;
 import org.itsimulator.germes.app.rest.dto.base.BaseDTO;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
- * Holds city state for the client-server communication 
+ * Holds city state for the client-server communication
+ * 
  * @author Morenets
  *
  */
-public class CityDTO extends BaseDTO<City>{
+@ApiModel(description = "City with transport stations to book and purchase tickets")
+public class CityDTO extends BaseDTO<City> {
 	private String name;
-	
+
 	/**
 	 * Name of the district where city is placed
 	 */
 	private String district;
-	
+
 	/**
-	 * Name of the region where district is located.
-	 * Region is top-level area in the country
+	 * Name of the region where district is located. Region is top-level area in
+	 * the country
 	 */
 	private String region;
 
+	@ApiModelProperty(name = "Name of the city", required = true)
 	public String getName() {
 		return name;
 	}
@@ -30,6 +36,7 @@ public class CityDTO extends BaseDTO<City>{
 		this.name = name;
 	}
 
+	@ApiModelProperty(name = "Name of the city's district. Empty for region center", required = false)
 	public String getDistrict() {
 		return district;
 	}
@@ -38,6 +45,7 @@ public class CityDTO extends BaseDTO<City>{
 		this.district = district;
 	}
 
+	@ApiModelProperty(name = "Name of the city's region", required = true)
 	public String getRegion() {
 		return region;
 	}

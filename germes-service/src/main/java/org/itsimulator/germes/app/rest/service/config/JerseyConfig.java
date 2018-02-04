@@ -5,11 +5,16 @@ import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.itsimulator.germes.app.config.ComponentFeature;
 
+import io.swagger.annotations.Contact;
+import io.swagger.annotations.Info;
+import io.swagger.annotations.SwaggerDefinition;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 
 @ApplicationPath("api")
+@SwaggerDefinition(info = @Info(description = "Booking and purchasing API definition", title = "Germes project", version = "0.7.4", 
+contact = @Contact(email = "sergey.morenets@gmail.com", name = "Sergey Morenets", url = "http://it-simulator.com")))
 /**
  * REST web-service configuration for Jersey
  * 
