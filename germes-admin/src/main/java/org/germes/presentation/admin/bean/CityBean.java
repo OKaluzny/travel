@@ -31,7 +31,7 @@ public class CityBean {
 		this.name = name;
 	}
 
-	public String getDistrict() {
+	public String getDistrict() { 
 		return district;
 	}
 

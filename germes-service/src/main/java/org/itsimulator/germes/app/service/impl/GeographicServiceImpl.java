@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -25,6 +26,7 @@ import org.itsimulator.germes.app.service.GeographicService;
  * @author Morenets
  *
  */
+@Named
 public class GeographicServiceImpl implements GeographicService {
 	private final CityRepository cityRepository;
 
