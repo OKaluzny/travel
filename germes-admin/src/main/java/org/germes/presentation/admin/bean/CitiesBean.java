@@ -1,10 +1,13 @@
 package org.germes.presentation.admin.bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.itsimulator.germes.app.model.entity.geography.City;
+import org.itsimulator.germes.app.service.GeographicService;
 
 @Named
 @RequestScoped
@@ -16,15 +19,14 @@ import javax.inject.Named;
  */
 public class CitiesBean {
 
-	private final List<CityBean> cities;
+	private final GeographicService geographicService;
 	
-	public CitiesBean() {
-		cities = new ArrayList<>();
-		cities.add(new CityBean("Odessa", "", "Odessa"));
-		cities.add(new CityBean("Izmail", "", "Odessa"));
+	@Inject
+	public CitiesBean(GeographicService geographicService) {
+		this.geographicService = geographicService;
 	}
 
-	public List<CityBean> getCities() {
-		return cities;
+	public List<City> getCities() {
+		return geographicService.findCities();
 	}
 }

@@ -6,6 +6,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import javax.annotation.PreDestroy;
+import javax.inject.Named;
 import javax.persistence.Entity;
 import javax.persistence.PersistenceException;
 
@@ -22,6 +23,7 @@ import org.reflections.Reflections;
  * @author Morenets
  *
  */
+@Named
 public class SessionFactoryBuilder {
 	private final SessionFactory sessionFactory;
 

@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.it-simulator</groupId>
 		<artifactId>germes</artifactId>
-		<version>0.7.8</version>
+		<version>0.7.9</version>
 	</parent>
 	<artifactId>germes-persistence</artifactId>
 
@@ -46,5 +46,10 @@
 			<artifactId>HikariCP</artifactId>
 			<version>2.4.6</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>		
 	</dependencies>
 </project>

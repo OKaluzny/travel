@@ -3,6 +3,7 @@ package org.itsimulator.germes.app.persistence.repository.hibernate;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -21,6 +22,7 @@ import org.slf4j.LoggerFactory;
  * @author Morenets
  *
  */
+@Named
 public class HibernateCityRepository implements CityRepository {
 	private static final Logger LOGGER = LoggerFactory.getLogger(HibernateCityRepository.class);
 

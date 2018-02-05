@@ -3,6 +3,7 @@ package org.itsimulator.germes.app.persistence.repository.hibernate;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -15,6 +16,7 @@ import org.itsimulator.germes.app.model.search.criteria.StationCriteria;
 import org.itsimulator.germes.app.persistence.hibernate.SessionFactoryBuilder;
 import org.itsimulator.germes.app.persistence.repository.StationRepository;
 
+@Named
 public class HibernateStationRepository implements StationRepository {
 
 	private final SessionFactory sessionFactory;
