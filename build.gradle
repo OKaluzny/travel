@@ -1,9 +1,13 @@
+plugins {
+	id "org.akhikhl.gretty" version "1.4.0"
+}
+
 allprojects  {
   apply plugin: 'maven'
   apply plugin: 'eclipse'
 
   group = 'org.it-simulator'
-  version = '0.7.5'
+  version = '0.7.6'
 }
 
 subprojects {
@@ -17,7 +21,7 @@ subprojects {
 	   hibernateVersion = '5.1.0.Final'
            elVersion = '2.2.4'
    }
-   
+  
   apply plugin: 'java'
   sourceCompatibility = 1.8
   targetCompatibility = 1.8

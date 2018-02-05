@@ -1,8 +1,8 @@
 plugins {
-	id "org.akhikhl.gretty" version "1.4.0"
     id 'com.craigburke.karma' version '1.4.3'	
 }
 
+apply plugin: 'org.akhikhl.gretty'
 apply plugin: 'war'
 
 dependencies {
