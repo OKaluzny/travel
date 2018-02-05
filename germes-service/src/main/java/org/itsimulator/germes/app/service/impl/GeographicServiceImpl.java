@@ -11,6 +11,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.itsimulator.germes.app.infra.cdi.DBSource;
 import org.itsimulator.germes.app.infra.exception.flow.ValidationException;
 import org.itsimulator.germes.app.model.entity.geography.City;
 import org.itsimulator.germes.app.model.entity.geography.Station;
@@ -35,7 +36,7 @@ public class GeographicServiceImpl implements GeographicService {
 	private final Validator validator;
 
 	@Inject
-	public GeographicServiceImpl(CityRepository cityRepository, StationRepository stationRepository) {
+	public GeographicServiceImpl(@DBSource CityRepository cityRepository, @DBSource StationRepository stationRepository) {
 		this.cityRepository = cityRepository;
 		this.stationRepository = stationRepository;
 
