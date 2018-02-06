@@ -8,9 +8,6 @@ dependencies {
     testRuntime 'org.glassfish.jersey.containers:jersey-container-grizzly2-http:' + jerseyVersion
     testCompile 'org.glassfish.jersey.test-framework:jersey-test-framework-core:' + jerseyVersion
     testRuntime 'org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-grizzly2:' + jerseyVersion
-    testCompile 'org.powermock:powermock-module-junit4:' + powerMockVersion
-    testCompile 'org.powermock:powermock-api-mockito:' + powerMockVersion
-    testCompile 'org.jmockit:jmockit:1.21'
     testRuntime 'com.h2database:h2:1.4.191'
     testRuntime 'org.hsqldb:hsqldb:2.3.3'
     testRuntime 'org.xerial:sqlite-jdbc:3.8.11.2'
