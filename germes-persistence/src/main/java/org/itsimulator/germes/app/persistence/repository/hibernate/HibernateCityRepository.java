@@ -59,10 +59,18 @@ public class HibernateCityRepository implements CityRepository {
 
 	@Override
 	public void delete(int cityId) {
+		Transaction tx = null;
 		try (Session session = sessionFactory.openSession()) {
+			tx = session.beginTransaction();
 			City city = session.get(City.class, cityId);
 			if (city != null) {
 				session.delete(city);
+			}
+			tx.commit();
+		}catch (Exception ex) {
+			LOGGER.error(ex.getMessage(), ex);
+			if (tx != null) {
+				tx.rollback();
 			}
 		}
 	}

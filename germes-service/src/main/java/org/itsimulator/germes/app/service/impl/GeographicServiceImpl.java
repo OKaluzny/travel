@@ -36,7 +36,8 @@ public class GeographicServiceImpl implements GeographicService {
 	private final Validator validator;
 
 	@Inject
-	public GeographicServiceImpl(@DBSource CityRepository cityRepository, @DBSource StationRepository stationRepository) {
+	public GeographicServiceImpl(@DBSource CityRepository cityRepository,
+			@DBSource StationRepository stationRepository) {
 		this.cityRepository = cityRepository;
 		this.stationRepository = stationRepository;
 
@@ -52,8 +53,8 @@ public class GeographicServiceImpl implements GeographicService {
 	@Override
 	public void saveCity(City city) {
 		Set<ConstraintViolation<City>> constraintViolations = validator.validate(city);
-		if(!constraintViolations.isEmpty()) {
-			throw new ValidationException("City validation failure", constraintViolations); 
+		if (!constraintViolations.isEmpty()) {
+			throw new ValidationException("City validation failure", constraintViolations);
 		}
 
 		cityRepository.save(city);
@@ -77,5 +78,10 @@ public class GeographicServiceImpl implements GeographicService {
 	@Override
 	public void saveCities(List<City> cities) {
 		cityRepository.saveAll(cities);
+	}
+
+	@Override
+	public void deleteCity(int cityId) {
+		cityRepository.delete(cityId);
 	}
 }
