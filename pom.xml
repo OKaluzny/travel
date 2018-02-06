@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.it-simulator</groupId>
 	<artifactId>germes</artifactId>
-	<version>0.9.0</version>
+	<version>0.9.1</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>germes-presentation</module>
@@ -26,7 +26,7 @@
 		<el.version>2.2.4</el.version>
 		<weld.version>2.4.1.Final</weld.version>
 		<h2.version>1.4.194</h2.version>
-		<jetty.version>9.3.15.v20161220</jetty.version>
+		<jetty.version>9.4.2.v20170220</jetty.version>
 	</properties>
 
 	<dependencies>
@@ -72,7 +72,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.2</version>
+				<version>3.6.1</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
