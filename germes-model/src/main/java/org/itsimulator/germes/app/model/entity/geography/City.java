@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,11 +27,14 @@ import org.itsimulator.germes.app.model.entity.transport.TransportType;
  */
 @Table(name = "CITY")
 @Entity
-@NamedQuery(name=City.QUERY_DELETE_ALL, query="delete from City")
+@NamedQueries({ @NamedQuery(name = City.QUERY_DELETE_ALL, query = "delete from City"),
+		@NamedQuery(name = City.QUERY_FIND_ALL, query = "from City") })
 public class City extends AbstractEntity {
 	public static final String FIELD_NAME = "name";
-	
+
 	public static final String QUERY_DELETE_ALL = "deleteCities";
+
+	public static final String QUERY_FIND_ALL = "City.findAll";
 
 	private String name;
 
@@ -69,7 +73,7 @@ public class City extends AbstractEntity {
 	}
 
 	@NotNull
-	@Size(min = 2, max = 32)	
+	@Size(min = 2, max = 32)
 	@Column(name = "DISTRICT", nullable = false, length = 32)
 	public String getDistrict() {
 		return district;
@@ -80,7 +84,7 @@ public class City extends AbstractEntity {
 	}
 
 	@NotNull
-	@Size(min = 2, max = 32)	
+	@Size(min = 2, max = 32)
 	@Column(name = "REGION", nullable = false, length = 32)
 	public String getRegion() {
 		return region;
