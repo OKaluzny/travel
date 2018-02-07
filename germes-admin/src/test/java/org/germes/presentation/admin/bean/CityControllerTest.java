@@ -10,6 +10,7 @@ import org.jglue.cdiunit.CdiRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+
 import static org.mockito.Mockito.*;
 
 @RunWith(CdiRunner.class)
@@ -31,10 +32,11 @@ public class CityControllerTest {
 	@Produces
 	@Mock
 	private Transformer transformer;
-
+	
 	@Test
 	public void saveCity_cityInitialzed_citySuccessfullySaved() {
 		CityBean cityBean = new CityBean();
+		when(transformer.untransform(cityBean, City.class)).thenReturn(new City());
 		cityController.saveCity(cityBean);		
 		verify(geographicService, atLeastOnce()).saveCity(any(City.class));
 	}
