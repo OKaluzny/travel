@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.itsimulator.germes.app.infra.cdi.DBSource;
+import org.itsimulator.germes.app.infra.util.SecurityUtil;
 import org.itsimulator.germes.app.model.entity.person.User;
 import org.itsimulator.germes.app.persistence.repository.UserRepository;
 import org.itsimulator.germes.app.service.UserService;
@@ -25,10 +26,10 @@ public class UserServiceImpl implements UserService {
 	@Inject
 	public UserServiceImpl(@DBSource UserRepository userRepository) {
 		this.userRepository = userRepository;
-		
+
 		User user = new User();
 		user.setUserName("guest");
-		user.setPassword("guest");
+		user.setPassword(SecurityUtil.encryptSHA("guest"));
 		userRepository.save(user);
 	}
 

@@ -9,6 +9,7 @@ import org.apache.shiro.authc.SimpleAccount;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -18,7 +19,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Authorization component that integrates with {@link UserService} to fetch user by login
+ * Authorization component that integrates with {@link UserService} to fetch
+ * user by login
+ * 
  * @author Morenets
  *
  */
@@ -29,6 +32,12 @@ public class CDIRealm extends AuthorizingRealm {
 
 	public CDIRealm(UserService userService) {
 		this.userService = userService;
+
+		HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
+		credentialsMatcher.setHashAlgorithmName("SHA-256");
+		credentialsMatcher.setStoredCredentialsHexEncoded(true);
+
+		setCredentialsMatcher(credentialsMatcher);
 	}
 
 	@Override
@@ -37,10 +46,11 @@ public class CDIRealm extends AuthorizingRealm {
 		String username = upToken.getUsername();
 
 		try {
-			String password = Optional.ofNullable(username).flatMap(name -> userService.findByUserName(name)).map(User::getPassword)
+			String password = Optional.ofNullable(username).flatMap(name -> userService.findByUserName(name))
+					.map(User::getPassword)
 					.orElseThrow(() -> new UnknownAccountException("No account found for user " + username));
 
-			return new SimpleAuthenticationInfo(username, password.toCharArray(), getName());
+			return new SimpleAuthenticationInfo(username, password, getName());
 
 		} catch (Exception e) {
 			String message = "There was a error while authenticating user " + username;
