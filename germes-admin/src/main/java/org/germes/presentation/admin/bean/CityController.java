@@ -3,8 +3,6 @@ package org.germes.presentation.admin.bean;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Initialized;
-import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -30,9 +28,6 @@ public class CityController {
 	public CityController(GeographicService geographicService, Transformer transformer) {
 		this.geographicService = geographicService;
 		this.transformer = transformer;
-	}
-
-	public void init(@Observes @Initialized(ApplicationScoped.class) Object event) {
 	}
 
 	public List<City> getCities() {

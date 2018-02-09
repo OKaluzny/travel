@@ -25,6 +25,11 @@ public class UserServiceImpl implements UserService {
 	@Inject
 	public UserServiceImpl(@DBSource UserRepository userRepository) {
 		this.userRepository = userRepository;
+		
+		User user = new User();
+		user.setUserName("guest");
+		user.setPassword("guest");
+		userRepository.save(user);
 	}
 
 	@Override
@@ -45,5 +50,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> findAll() {
 		return userRepository.findAll();
+	}
+
+	@Override
+	public Optional<User> findByUserName(String userName) {
+		return userRepository.findByUserName(userName);
 	}
 }
