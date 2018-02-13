@@ -23,6 +23,10 @@ dependencies {
     testRuntime 'org.powermock:powermock-api-mockito2:1.7.0RC4'
 }
 
+war {
+	archiveName 'admin.war'
+}
+
 repositories {
 	maven { url "http://repository.primefaces.org" }
 }
