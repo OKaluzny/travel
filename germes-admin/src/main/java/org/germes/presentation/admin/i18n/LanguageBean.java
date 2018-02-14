@@ -1,20 +1,23 @@
 package org.germes.presentation.admin.i18n;
 
+import java.io.Serializable;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 
-@ManagedBean(name = "language")
+@Named("language")
 @SessionScoped
 /**
  * Keeps selected langauge for the current user
  * @author Morenets
  *
  */
-public class LanguageBean {
+public class LanguageBean implements Serializable{
+	private static final long serialVersionUID = -1622109063359055116L;
+	
 	/**
 	 * Locale for the current user
 	 */

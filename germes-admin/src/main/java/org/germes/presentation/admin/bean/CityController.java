@@ -3,6 +3,8 @@ package org.germes.presentation.admin.bean;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.push.Push;
+import javax.faces.push.PushContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,6 +25,9 @@ public class CityController {
 	private final GeographicService geographicService;
 
 	private final Transformer transformer;
+	
+	@Inject @Push
+    private PushContext cityChannel;
 
 	@Inject
 	public CityController(GeographicService geographicService, Transformer transformer) {
@@ -37,6 +42,8 @@ public class CityController {
 	public void saveCity(CityBean cityBean) {
 		City city = transformer.untransform(cityBean, City.class);
 		geographicService.saveCity(city);
+		
+		cityChannel.send("test");
 	}
 
 	public void update(City city, CityBean cityBean) {
