@@ -11,15 +11,13 @@ dependencies {
 	runtime 'javax.enterprise:cdi-api:1.2'
     runtime 'mysql:mysql-connector-java:6.0.6'
     
-    compile 'org.jboss.weld.servlet:weld-servlet:' + weldVersion    
     compile 'org.primefaces.themes:bootstrap:1.0.10'
     compile 'org.projectlombok:lombok:1.16.14'
     compile("org.apache.shiro:shiro-core:${apacheShiroVersion}")
     compile("org.apache.shiro:shiro-web:${apacheShiroVersion}")
     runtime 'commons-logging:commons-logging:1.2'
     
-    testCompile('org.jglue.cdi-unit:cdi-unit:3.1.4') { exclude group:'org.jboss.weld.se' }
-    testCompile 'org.jboss.weld.se:weld-se-core:' + weldVersion    
+    testCompile('org.jglue.cdi-unit:cdi-unit:3.1.4') 
     testCompile 'org.mockito:mockito-core:2.7.19'
     testRuntime 'org.powermock:powermock-api-mockito2:1.7.0RC4'
 }
@@ -45,5 +43,5 @@ processResources {
          dest  : project.file('src/main/resources/ui') 
       )
    }
-    exclude('txt')
+    exclude('txt', 'docker')
 }

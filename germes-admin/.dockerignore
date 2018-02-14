@@ -1,0 +1,4 @@
+*
+!src/main/resources/docker
+!src/main/resources/admin.xml
+!build/libs/admin.war
