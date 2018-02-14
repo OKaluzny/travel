@@ -25,7 +25,7 @@ public class JerseyConfig extends ResourceConfig {
 	public JerseyConfig() {
 		super(ComponentFeature.class);
 		packages("org.itsimulator.germes.app.rest");
-
+		
 		initBeanConfig();
 
 		register(ApiListingResource.class);

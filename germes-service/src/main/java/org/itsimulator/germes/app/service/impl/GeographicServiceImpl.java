@@ -9,7 +9,6 @@ import javax.inject.Named;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-
 import org.itsimulator.germes.app.infra.cdi.DBSource;
 import org.itsimulator.germes.app.infra.exception.flow.ValidationException;
 import org.itsimulator.germes.app.model.entity.geography.City;

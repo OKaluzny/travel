@@ -2,7 +2,7 @@ package org.itsimulator.germes.app.config;
 
 import javax.inject.Singleton;
 
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import org.glassfish.jersey.internal.inject.AbstractBinder;
 import org.itsimulator.germes.app.infra.cdi.DBSourceInstance;
 import org.itsimulator.germes.app.persistence.hibernate.SessionFactoryBuilder;
 import org.itsimulator.germes.app.persistence.repository.CityRepository;

@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.it-simulator</groupId>
 		<artifactId>germes</artifactId>
-		<version>1.0.9</version>
+		<version>1.1.0</version>
 	</parent>
 	<artifactId>germes-rest</artifactId>
 	<dependencyManagement>
@@ -50,6 +50,10 @@
 			<artifactId>jersey-media-json-jackson</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.glassfish.jersey.test-framework</groupId>
 			<artifactId>jersey-test-framework-core</artifactId>
 			<scope>test</scope>
@@ -91,13 +95,13 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>6.0.6</version>
+			<version>${mysql.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-jersey2-jaxrs</artifactId>
-			<version>1.5.12</version>
+			<version>1.5.16</version>
 		</dependency>
 
 	</dependencies>

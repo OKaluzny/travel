@@ -1,10 +1,11 @@
 dependencies {
     compile project(':germes-model')
-    testCompile 'org.hibernate:hibernate-tools:5.2.2.Final'
+    testCompile 'org.hibernate:hibernate-tools:5.2.6.Final'
 
-    compile 'org.glassfish.hk2.external:javax.inject:2.5.0-b36' 
+    compile 'javax.inject:javax.inject:1'
     compile 'org.reflections:reflections:0.9.11'
     compile 'com.zaxxer:HikariCP:2.6.1'
+ 	runtime 'javax.el:javax.el-api:' + elVersion
 
     testRuntime 'com.h2database:h2:' + h2Version
 }

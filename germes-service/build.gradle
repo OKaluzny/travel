@@ -1,6 +1,8 @@
 dependencies {
     compile project(':germes-model')
-    compile project(':germes-persistence')    
+    compile project(':germes-persistence')
+    compile 'org.glassfish:javax.el:' + elVersion
+        
     testCompile 'org.powermock:powermock-module-junit4:' + powerMockVersion
     testCompile 'org.powermock:powermock-api-mockito:' + powerMockVersion
     testCompile 'org.jmockit:jmockit:1.30'
