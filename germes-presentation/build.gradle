@@ -15,6 +15,13 @@ gretty {
 	servletContainer = 'tomcat8'
 }
 
+war {
+	archiveName 'client.war'
+	exclude 'test'
+	exclude 'bower.json'
+	exclude 'package.json'
+}
+
 karma {
     basePath = '../src/main/webapp' 
     colors = true 
@@ -36,3 +43,4 @@ karma {
         testFiles = ['*.js'] 
     }    
 }
+

@@ -45,5 +45,5 @@ processResources {
          dest  : project.file('src/main/resources/ui') 
       )
    }
-    exclude('txt', 'docker')
+    exclude('txt', 'docker', 'admin.xml')
 }
