@@ -17,6 +17,8 @@ dependencies {
     compile("org.apache.shiro:shiro-web:${apacheShiroVersion}")
     runtime 'commons-logging:commons-logging:1.2'
     
+    runtime 'org.javassist:javassist:3.22.0-GA'
+    
     testCompile('org.jglue.cdi-unit:cdi-unit:4.0.1') 
     testCompile 'org.mockito:mockito-core:2.7.19'
     testRuntime 'org.powermock:powermock-api-mockito2:1.7.0RC4'
