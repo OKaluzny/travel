@@ -17,9 +17,9 @@ gretty {
 
 war {
 	archiveName 'client.war'
-	exclude 'test'
-	exclude 'bower.json'
-	exclude 'package.json'
+        exclude('test', '**/*bower.json', '**/package.json', '**/*.md', '**/*.gzip', '**/*.map', '*.js')
+	
+	classpath = classpath.filter { !project.hasProperty('glassfish') || !it.name.contains('jersey') }
 }
 
 karma {
