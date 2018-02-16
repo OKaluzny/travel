@@ -16,7 +16,7 @@
 					value="#{userBean.password}" />
 
 				<p:commandButton value="#{msg['button.login']}"
-					action="#{userBean.login}" />
+					action="#{userBean.login()}" />
 			</h:panelGrid>
 
 			<p:messages id="messages" autoUpdate="true" closable="true" />

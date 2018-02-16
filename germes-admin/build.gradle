@@ -24,7 +24,13 @@ dependencies {
     testRuntime 'org.powermock:powermock-api-mockito2:1.7.0RC4'
 }
 
+def isWildflyDependency(File file) {
+    return ["jboss", "weld", "cdi", "javax.faces", "validation-api", "javax.el"].findIndexOf { file.getName().contains(it) } >= 0
+}
+
 war {
+    classpath = classpath.filter { !project.hasProperty('wildfly') || !isWildflyDependency(it) }
+    
 	archiveName 'admin.war'
 }
 
