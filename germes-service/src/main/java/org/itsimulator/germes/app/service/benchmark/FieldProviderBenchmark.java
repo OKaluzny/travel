@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.itsimulator.germes.app.model.entity.geography.City;
 import org.itsimulator.germes.app.service.transform.impl.CachedFieldProvider;
 import org.itsimulator.germes.app.service.transform.impl.FieldProvider;
+import org.itsimulator.germes.app.service.transform.impl.GuavaCachedFieldProvider;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -36,10 +37,13 @@ public class FieldProviderBenchmark {
 	
 	private FieldProvider cachedProvider;
 	
+	private FieldProvider guavaCachedProvider;
+	
 	@Setup
 	public void setup() {
 		provider = new FieldProvider();
 		cachedProvider = new CachedFieldProvider();
+		guavaCachedProvider = new GuavaCachedFieldProvider(); 
 	}
 
 	@Benchmark
@@ -58,8 +62,18 @@ public class FieldProviderBenchmark {
 	}
 
 	@Benchmark
-	public void getFieldNames_cached_targetObject() {
+	public void getFieldNames_guava_targetObject() {
 		cachedProvider.getFieldNames(City.class, Object.class);
+	}
+
+	@Benchmark
+	public void getFieldNames_guava_targetCityCopy() {
+		guavaCachedProvider.getFieldNames(City.class, CityCopy.class);
+	}
+
+	@Benchmark
+	public void getFieldNames_cached_targetObject() {
+		guavaCachedProvider.getFieldNames(City.class, Object.class);
 	}
 	
 	public static void main(String[] args) throws Exception {

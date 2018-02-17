@@ -30,12 +30,6 @@ public class CachedFieldProvider extends FieldProvider{
 	@Override
 	public List<String> getFieldNames(Class<?> source, Class<?> dest) {
 		String key = source.getSimpleName() + dest.getSimpleName();
-		List<String> fields = cache.get(key);
-		if(fields == null) {
-			 fields = ReflectionUtil.findSimilarFields(source, dest);
-			 cache.put(key, fields);
-		}
-		
-		return fields;
+		return cache.computeIfAbsent(key, item -> ReflectionUtil.findSimilarFields(source, dest));
 	}
 }
