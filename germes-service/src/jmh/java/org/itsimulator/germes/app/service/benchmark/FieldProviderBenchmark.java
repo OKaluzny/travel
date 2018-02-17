@@ -1,5 +1,7 @@
 package org.itsimulator.germes.app.service.benchmark;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.itsimulator.germes.app.model.entity.geography.City;
@@ -11,6 +13,7 @@ import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -32,50 +35,30 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 @BenchmarkMode(Mode.AverageTime)
 @State(Scope.Benchmark)
 public class FieldProviderBenchmark {
-	
-	private FieldProvider provider; 
-	
-	private FieldProvider cachedProvider;
-	
-	private FieldProvider guavaCachedProvider;
-	
+
+	private Map<String, FieldProvider> providers;
+
+	@Param({ "Basic", "Cached", "Guava" })
+	private String provider;
+
 	@Setup
 	public void setup() {
-		provider = new FieldProvider();
-		cachedProvider = new CachedFieldProvider();
-		guavaCachedProvider = new GuavaCachedFieldProvider(); 
+		providers = new HashMap<>();
+		providers.put("Basic", new FieldProvider());
+		providers.put("Cached", new CachedFieldProvider());
+		providers.put("Guava", new GuavaCachedFieldProvider());
 	}
 
 	@Benchmark
 	public void getFieldNames_targetCityCopy() {
-		provider.getFieldNames(City.class, CityCopy.class);
+		providers.get(provider).getFieldNames(City.class, CityCopy.class);
 	}
 
 	@Benchmark
 	public void getFieldNames_targetObject() {
-		provider.getFieldNames(City.class, Object.class);
+		providers.get(provider).getFieldNames(City.class, Object.class);
 	}
 
-	@Benchmark
-	public void getFieldNames_cached_targetCityCopy() {
-		cachedProvider.getFieldNames(City.class, CityCopy.class);
-	}
-
-	@Benchmark
-	public void getFieldNames_guava_targetObject() {
-		cachedProvider.getFieldNames(City.class, Object.class);
-	}
-
-	@Benchmark
-	public void getFieldNames_guava_targetCityCopy() {
-		guavaCachedProvider.getFieldNames(City.class, CityCopy.class);
-	}
-
-	@Benchmark
-	public void getFieldNames_cached_targetObject() {
-		guavaCachedProvider.getFieldNames(City.class, Object.class);
-	}
-	
 	public static void main(String[] args) throws Exception {
 		Options opts = new OptionsBuilder().include(".*").mode(Mode.AverageTime).timeUnit(TimeUnit.NANOSECONDS)
 				.resultFormat(ResultFormatType.TEXT).build();
@@ -83,5 +66,4 @@ public class FieldProviderBenchmark {
 		new Runner(opts).run();
 	}
 
-	
 }

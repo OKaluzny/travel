@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.it-simulator</groupId>
 		<artifactId>germes</artifactId>
-		<version>1.2.5</version>
+		<version>1.2.6</version>
 	</parent>
 	<artifactId>germes-presentation</artifactId>
 	<packaging>war</packaging>
@@ -21,6 +21,12 @@
 			<version>${h2.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.openjdk.jmh</groupId>
+			<artifactId>jmh-core</artifactId>
+			<version>${jmh.version}</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -29,7 +35,7 @@
 				<directory>src/main/resources</directory>
 				<excludes>
 					<exclude>ui/*.txt</exclude>
-					<exclude>docker/*.*</exclude>					
+					<exclude>docker/*.*</exclude>
 				</excludes>
 			</resource>
 		</resources>
@@ -41,7 +47,8 @@
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<warName>client</warName>
-					<packagingExcludes>*.js,test/**,**/**/*.md,**/**/*.map,**/package.json,**/*bower.json, **/*.gzip</packagingExcludes>
+					<packagingExcludes>*.js,test/**,**/**/*.md,**/**/*.map,**/package.json,**/*bower.json,
+						**/*.gzip</packagingExcludes>
 				</configuration>
 			</plugin>
 			<plugin>
