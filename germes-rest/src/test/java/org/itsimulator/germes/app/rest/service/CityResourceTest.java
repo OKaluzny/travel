@@ -2,6 +2,9 @@ package org.itsimulator.germes.app.rest.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
@@ -38,7 +41,7 @@ public class CityResourceTest extends JerseyTest {
 		Map<String, String> city = cities.get(0);
 		assertEquals(city.get("name"), "Odessa");
 	}
-	
+
 	@Test
 	@Ignore
 	public void testFindCityByIdSuccess() {
@@ -54,23 +57,41 @@ public class CityResourceTest extends JerseyTest {
 		assertNotNull(response);
 		assertEquals(response.getStatus(), Response.Status.NOT_FOUND.getStatusCode());
 	}
-	
+
 	@Test
 	public void testFindCityByIdInvalidId() {
 		Response response = target("cities/aaab").request().get(Response.class);
 		assertNotNull(response);
 		assertEquals(response.getStatus(), Response.Status.BAD_REQUEST.getStatusCode());
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	@Test
-	public void testSaveCitySuccess() {
+	public void testSaveCitySuccess() throws InterruptedException {
 		CityDTO city = new CityDTO();
 		city.setName("Kiev");
-		city.setDistrict("Odessa");
-		city.setRegion("Odessa");
+		city.setDistrict("Kiev");
+		city.setRegion("Kiev");
 		
-		Response response = target("cities").request().post(Entity.entity(city, MediaType.APPLICATION_JSON));
-		assertEquals(response.getStatus(), Response.Status.NO_CONTENT.getStatusCode());
-	}	
-	
+		CountDownLatch latch = new CountDownLatch(2);
+
+		target("cities").request().rx().post(Entity.entity(city, MediaType.APPLICATION_JSON))
+		.thenAccept(response -> {
+			latch.countDown();
+			assertEquals(response.getStatus(), Response.Status.NO_CONTENT.getStatusCode());
+			target("cities").request().rx().get(Response.class)
+				.thenAccept(resp -> {
+					List<Map<String, String>> cities = (List<Map<String, String>>) resp.readEntity(List.class);
+					assertNotNull(cities);
+					assertTrue(cities.stream().anyMatch(item -> item.get("name").equals("Kiev")));
+					latch.countDown();					
+				}).exceptionally(ex -> {
+					ex.printStackTrace();
+					return null;
+				});
+		});
+		latch.await(5, TimeUnit.SECONDS);
+		assertEquals(latch.getCount(), 0);
+	}
+
 }
