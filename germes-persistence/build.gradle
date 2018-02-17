@@ -11,3 +11,7 @@ dependencies {
 
     testRuntime 'com.h2database:h2:' + h2Version
 }
+
+compileJava {
+    options.compilerArgs += ["--add-modules=java.xml.ws.annotation"]
+}

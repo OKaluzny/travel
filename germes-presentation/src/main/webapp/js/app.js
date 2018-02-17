@@ -3,7 +3,7 @@
 var app = angular.module('app', [ 'ngResource', 'pascalprecht.translate' ]);
 
 app.factory('cityService', [ '$resource', function($resource) {
-	return $resource('/api/cities');
+	return $resource('api/cities');
 } ]);
 
 app.config(function($translateProvider) {

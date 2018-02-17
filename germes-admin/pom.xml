@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.it-simulator</groupId>
 		<artifactId>germes</artifactId>
-		<version>1.2.8</version>
+		<version>1.2.9</version>
 	</parent>
 	<packaging>war</packaging>
 	<artifactId>germes-admin</artifactId>
@@ -56,7 +56,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.14</version>
+			<version>1.16.18</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jglue.cdi-unit</groupId>
@@ -114,6 +114,17 @@
 			</resource>
 		</resources>
 		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<compilerArgs>
+						<arg>--add-modules=java.xml.ws.annotation</arg>
+					</compilerArgs>
+				</configuration>
+			</plugin>		
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.0</version>
