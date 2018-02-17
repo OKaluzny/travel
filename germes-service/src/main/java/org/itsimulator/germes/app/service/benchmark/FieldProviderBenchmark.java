@@ -1,17 +1,18 @@
 package org.itsimulator.germes.app.service.benchmark;
 
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.itsimulator.germes.app.model.entity.base.AbstractEntity;
 import org.itsimulator.germes.app.model.entity.geography.City;
-import org.itsimulator.germes.app.model.entity.geography.Station;
+import org.itsimulator.germes.app.service.transform.impl.CachedFieldProvider;
 import org.itsimulator.germes.app.service.transform.impl.FieldProvider;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
@@ -28,14 +29,39 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 @Measurement(iterations = 10)
 @Fork(value = 2, jvmArgsAppend = "-server")
 @BenchmarkMode(Mode.AverageTime)
+@State(Scope.Benchmark)
 public class FieldProviderBenchmark {
+	
+	private FieldProvider provider; 
+	
+	private FieldProvider cachedProvider;
+	
+	@Setup
+	public void setup() {
+		provider = new FieldProvider();
+		cachedProvider = new CachedFieldProvider();
+	}
 
 	@Benchmark
-	public void testFieldProvider_getFieldNames() {
-		FieldProvider provider = new FieldProvider();
+	public void getFieldNames_targetCityCopy() {
 		provider.getFieldNames(City.class, CityCopy.class);
 	}
 
+	@Benchmark
+	public void getFieldNames_targetObject() {
+		provider.getFieldNames(City.class, Object.class);
+	}
+
+	@Benchmark
+	public void getFieldNames_cached_targetCityCopy() {
+		cachedProvider.getFieldNames(City.class, CityCopy.class);
+	}
+
+	@Benchmark
+	public void getFieldNames_cached_targetObject() {
+		cachedProvider.getFieldNames(City.class, Object.class);
+	}
+	
 	public static void main(String[] args) throws Exception {
 		Options opts = new OptionsBuilder().include(".*").mode(Mode.AverageTime).timeUnit(TimeUnit.NANOSECONDS)
 				.resultFormat(ResultFormatType.TEXT).build();
@@ -43,45 +69,5 @@ public class FieldProviderBenchmark {
 		new Runner(opts).run();
 	}
 
-	public static class CityCopy extends AbstractEntity {
-		private String name;
-
-		private String district;
-
-		private String region;
-
-		private Set<Station> stations;
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public String getDistrict() {
-			return district;
-		}
-
-		public void setDistrict(String district) {
-			this.district = district;
-		}
-
-		public String getRegion() {
-			return region;
-		}
-
-		public void setRegion(String region) {
-			this.region = region;
-		}
-
-		public Set<Station> getStations() {
-			return stations;
-		}
-
-		public void setStations(Set<Station> stations) {
-			this.stations = stations;
-		}
-	}
+	
 }
