@@ -6,6 +6,8 @@ dependencies {
     compile 'org.reflections:reflections:0.9.11'
     compile 'com.zaxxer:HikariCP:2.6.1'
  	runtime 'javax.el:javax.el-api:' + elVersion
+ 	
+ 	jmh 'io.github.lukehutch:fast-classpath-scanner:2.9.3'
 
     testRuntime 'com.h2database:h2:' + h2Version
 }

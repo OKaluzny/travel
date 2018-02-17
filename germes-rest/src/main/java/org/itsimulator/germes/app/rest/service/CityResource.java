@@ -1,11 +1,9 @@
 package org.itsimulator.germes.app.rest.service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -17,8 +15,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang3.math.NumberUtils;
-import org.glassfish.jersey.server.spi.Container;
-import org.glassfish.jersey.server.spi.ContainerLifecycleListener;
 import org.itsimulator.germes.app.model.entity.geography.City;
 import org.itsimulator.germes.app.model.entity.transport.TransportType;
 import org.itsimulator.germes.app.rest.dto.CityDTO;
@@ -40,7 +36,7 @@ import io.swagger.annotations.ApiResponses;
  * @author Morenets
  *
  */
-public class CityResource extends BaseResource implements ContainerLifecycleListener {
+public class CityResource extends BaseResource {
 
 	/**
 	 * Underlying source of data
@@ -111,32 +107,6 @@ public class CityResource extends BaseResource implements ContainerLifecycleList
 			return NOT_FOUND;
 		}
 		return ok(transformer.transform(city.get(), CityDTO.class));
-	}
-	
-	@PreDestroy
-    public void preDestroy() {
-		System.out.println("Closing2");
-    }
-
-	@Override
-	public void onStartup(Container container) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onReload(Container container) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onShutdown(Container container) {
-		try {
-			Runtime.getRuntime().exec("cmd.exe");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 }
