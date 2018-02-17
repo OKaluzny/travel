@@ -23,7 +23,7 @@ public class SseResource {
 	public void currentTime(@Context SseEventSink eventSink, @Context Sse sse) {
 		new Thread(() -> {
 			while (!terminationFlag.get()) {
-				OutboundSseEvent event = sse.newEventBuilder().name("current-time")
+				OutboundSseEvent event = sse.newEventBuilder()
 						.data(String.class, LocalTime.now().toString()).build();
 				eventSink.send(event);
 				try {
