@@ -2,6 +2,8 @@ package org.itsimulator.germes.app.rest.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -67,31 +69,29 @@ public class CityResourceTest extends JerseyTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testSaveCitySuccess() throws InterruptedException {
+	public void testSaveCitySuccess() throws Throwable {
 		CityDTO city = new CityDTO();
 		city.setName("Kiev");
 		city.setDistrict("Kiev");
 		city.setRegion("Kiev");
-		
-		CountDownLatch latch = new CountDownLatch(2);
 
-		target("cities").request().rx().post(Entity.entity(city, MediaType.APPLICATION_JSON))
-		.thenAccept(response -> {
-			latch.countDown();
-			assertEquals(response.getStatus(), Response.Status.NO_CONTENT.getStatusCode());
-			target("cities").request().rx().get(Response.class)
-				.thenAccept(resp -> {
-					List<Map<String, String>> cities = (List<Map<String, String>>) resp.readEntity(List.class);
+		CompletableFuture<Void> cf = target("cities").request().rx()
+				.post(Entity.entity(city, MediaType.APPLICATION_JSON)).thenAccept(response -> 
+					assertEquals(response.getStatus(), Response.Status.NO_CONTENT.getStatusCode())
+				).thenCompose(v -> target("cities").request().rx().get(Response.class)).thenAccept(response -> {
+					List<Map<String, String>> cities = (List<Map<String, String>>) response.readEntity(List.class);
 					assertNotNull(cities);
 					assertTrue(cities.stream().anyMatch(item -> item.get("name").equals("Kiev")));
-					latch.countDown();					
-				}).exceptionally(ex -> {
-					ex.printStackTrace();
-					return null;
-				});
-		});
-		latch.await(5, TimeUnit.SECONDS);
-		assertEquals(latch.getCount(), 0);
+				}).toCompletableFuture();
+
+		try {
+			cf.join();
+		} catch (CompletionException e) {
+			if (e.getCause() != null) {
+				throw e.getCause();
+			}
+			fail(e.getMessage());
+		}
 	}
 
 }

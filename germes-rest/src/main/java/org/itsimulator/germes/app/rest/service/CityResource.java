@@ -69,6 +69,7 @@ public class CityResource extends BaseResource {
 	 * @return
 	 */
 	public List<CityDTO> findCities() {
+		System.out.println("Find");
 		return service.findCities().stream().map((city) -> transformer.transform(city, CityDTO.class))
 				.collect(Collectors.toList());
 	}
@@ -81,6 +82,7 @@ public class CityResource extends BaseResource {
 	 * @return
 	 */
 	public void saveCity(CityDTO cityDTO) {
+		System.out.println("Save");
 		service.saveCity(transformer.untransform(cityDTO, City.class));
 	}
 
