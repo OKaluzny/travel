@@ -49,7 +49,7 @@ describe('Testing City Controller', function() {
     				{}
     			]);
     	
-    	httpBackend.expectGET("/api/cities").respond(
+    	httpBackend.expectGET("api/cities").respond(
     			[
     				{
     					'name': 'Odessa',
