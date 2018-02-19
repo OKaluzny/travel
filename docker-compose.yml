@@ -1,1 +1,8 @@
 version : '3.4'
+services:
+  mysql:
+    build: 
+      context: germes-admin
+      dockerfile: src/main/resources/docker/mysql.dockerfile
+    logging:
+      driver: none
