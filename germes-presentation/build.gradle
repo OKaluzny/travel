@@ -28,7 +28,7 @@ karma {
     logLevel = 'INFO'
     profile 'default' 
     
-    browsers = ['Chrome'] 
+    browsers = ['PhantomJS'] 
     frameworks = ['jasmine'] 
     reporters = ['progress']
     profile('default')  {
