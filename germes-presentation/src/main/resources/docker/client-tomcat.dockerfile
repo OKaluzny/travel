@@ -1,5 +1,6 @@
 FROM tomcat:9-jre9
 
-ADD build/libs/client.war /usr/local/tomcat/webapps/
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
 
-ENV JAVA_OPTS="--add-modules java.xml.bind"
+ADD build/libs/client.war /usr/local/tomcat/webapps/ROOT.war
+
