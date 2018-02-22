@@ -2,17 +2,11 @@ plugins {
     id 'com.craigburke.karma' version '1.4.3'	
 }
 
-apply plugin: 'org.akhikhl.gretty'
 apply plugin: 'war'
 
 dependencies {
     compile project(':germes-rest')
-    runtime 'com.h2database:h2:' + h2Version
-}
-
-gretty {
-	contextPath = ''
-	servletContainer = 'tomcat8'
+    runtime 'mysql:mysql-connector-java:' + mysqlVersion
 }
 
 war {
