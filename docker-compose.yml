@@ -6,3 +6,20 @@ services:
       dockerfile: src/main/resources/docker/mysql.dockerfile
     logging:
       driver: none
+    networks:
+      - network1  
+  admin:
+    build: 
+      context: germes-admin
+      dockerfile: src/main/resources/docker/admin-tomcat.dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - network1
+    depends_on:
+      - mysql
+    entrypoint: bash -c "sleep 5s && catalina.sh run"                    
+networks:
+  network1:
+    driver: bridge
+  
