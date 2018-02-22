@@ -1,0 +1,16 @@
+version : '3.4'
+services:
+  admin:
+    build: 
+      dockerfile: germes-presentation/src/main/resources/docker/glassfish-maven.dockerfile
+    entrypoint: bash -c "sleep 5s && asadmin start-domain -v"
+    ports:
+      - "9000:8080"          
+      - "4849:4848"          
+  client:
+    build: 
+      dockerfile: germes-presentation/src/main/resources/docker/glassfish-maven.dockerfile
+    entrypoint: bash -c "sleep 5s && asadmin start-domain -v"
+    ports:
+      - "8080:8080"          
+      - "4848:4848"

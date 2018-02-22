@@ -16,8 +16,10 @@ services:
       - mysql.env 
   admin:
     build: 
-      context: germes-admin
-      dockerfile: src/main/resources/docker/admin-tomcat.dockerfile
+      context: .
+      dockerfile: germes-presentation/src/main/resources/docker/tomcat-maven.dockerfile
+      args:
+        - war_path=/opt/admin.war
     ports:
       - "9000:8080"
     networks:
@@ -29,8 +31,10 @@ services:
       - JAVA_OPTS=--add-modules java.xml.bind
   client:
     build: 
-      context: germes-presentation
-      dockerfile: src/main/resources/docker/client-tomcat.dockerfile
+      context: .
+      dockerfile: germes-presentation/src/main/resources/docker/tomcat-maven.dockerfile
+      args:
+        - war_path=/opt/client.war      
     ports:
       - "8080:8080"
     networks:
