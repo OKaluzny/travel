@@ -3,14 +3,17 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-
+import { CitiesComponent } from './cities/cities.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CitiesComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    TranslateModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
