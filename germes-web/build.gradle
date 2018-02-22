@@ -1,4 +1,28 @@
+plugins {
+  id "com.moowork.node" version "1.2.0"
+}
+
+apply plugin:"com.moowork.node"
 apply plugin: 'war'
+
+node {
+  nodeModulesDir = file("client")
+}
+
+task buildAngular(type:NpmTask, dependsOn:'npmInstall') {
+  args = ['run','build'];
+}
+
+task cleanAngular(type: Delete) {
+    delete "${projectDir}/client/dist"
+}
+
+assemble.dependsOn 'buildAngular'
+clean.dependsOn 'cleanAngular'
+
+war {
+    from 'client/dist'
+} 
 
 dependencies {
     compile project(':germes-rest')
